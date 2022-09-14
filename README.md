@@ -8,7 +8,7 @@ Graylog is a log monitoring tool.
 Icinga is a tool for machine monitoring. 
 
 
-# features
+# Features
 - debugging
 - customizations can be done via Graylog
 - query search to not show alerts that should not trigger anything
@@ -24,5 +24,8 @@ Icinga is a tool for machine monitoring.
 - how well this plugin works depends very much on which alarms&events are configured in the Graylog
 
 
+# License
+Licensed under the terms of Apache License Version 2. See LICENSE file.
+
 # More
-[Dev-Site](https://okxo.de/show-graylog-alerts-in-icinga2/)
+[Dev-Site okxo.de](https://okxo.de/show-graylog-alerts-in-icinga2/)
