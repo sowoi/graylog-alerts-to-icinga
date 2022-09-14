@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-# Developer: Massoud Ahmed 
+# Developer: Massoud Ahmed (dtnet)
+# Create graylgo user
 
 
-import sys, socket, argparse, json, requests, urllib3, ipaddress, logging
+
+import sys, socket, argparse, json, requests, urllib3, ipaddress
+import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from optparse import OptionParser, OptionGroup
+import logging
 
 LOGGER = logging.getLogger('check_graylog_alert')
 
