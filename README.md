@@ -82,23 +82,62 @@ object Service "Service: Graylog Alerts" {
 
 # icinga director
 - Create a custome command with following arguments:
-![icinga director]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/check_graylog_icinga_director.png?raw=true
+![icinga director](https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/check_graylog_icinga_director.png?raw=true)
 
 
 # CLI Usage
 - "python3 check_graylog_alerts.py -h" will show you a manual.
 
+```
+Usage: check_graylog_alerts.py [options]
+
+check_graylog_alerts.py checks graylog stream for alerts. you need to setup
+alerts beforehand.   Example: check_graylog_alerts.py -H 192.168.134.11 -u
+admin -p secret -m testmachine -t 33
+
+Options:
+  -h, --help            show this help message and exit
+
+  Generic options:
+    -d, --debug         enable debugging outputs (default: no)
+
+  Host options:
+    -H HOST, --host=HOST
+                        defines graylog  hostname or IP
+
+  User options:
+    -u USER, --user=USER
+                        graylog user with access to API and event stream
+                        (default: admin)
+
+  Password options:
+    -p PASSWORD, --password=PASSWORD
+                        graylog user password (default: none)
+
+  Machine options:
+    -m MACHINE, --machine=MACHINE
+                        machine to check for in graylog stream  (default: all)
+
+  Timerange options:
+    -t TIMERANGE, --time=TIMERANGE
+                        timerange since now in seconds (default 86400)
+
+  Query options:
+    -q QUERY, --query=QUERY
+                        graylog search query (default: show all queries)
+```
+
 
 # Create a readonly monitoring user
 - In Graylog, open the System tab and select "Users and Teams".
 - Create a new user with assigend role: "View Manager"
-![icinga user]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/createIcinga2user.png
+![icinga user](https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/createIcinga2user.png)
 
 - Share your "All Events" Stream with the new user
-![Share all events]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/GraylogEvents.png
+![Share all events](https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/GraylogEvents.png)
 
 - Add your newly created user. Leave the rights at "Viewer".
-![Share all events]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/icingauserviewer.png
+![Share all events](https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/icingauserviewer.png)
 
 # License
 Licensed under the terms of Apache License Version 2. See LICENSE file.
