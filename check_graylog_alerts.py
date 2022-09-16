@@ -72,12 +72,13 @@ def create_session(headers, host,user,password):
     proto = "https"
     data = '{"username":"'+user+'", "password":"'+password+'", "host":""}'
     try:
-     session = requests.post(base, headers=headers, data=data)
+     session = requests.post(base, headers=headers, data=data, verify=False)
      session = session.json()
      session_id = session['session_id']
      LOGGER.debug("Successfully created session_id "+ str(session['session_id']))
      LOGGER.debug("Valid until " + str(session['valid_until']))
-    except:
+    except Exception as ex:
+     LOGGER.debug(ex)
      try:
       base = ("http://" + host+ ":9000/api/system/sessions")
       LOGGER.debug("https did not work. Using "+ base+ " instead")
@@ -88,7 +89,8 @@ def create_session(headers, host,user,password):
       session_id = session['session_id']
       LOGGER.debug("Successfully created session_id "+ str(session['session_id']))
       LOGGER.debug("Valid until " + str(session['valid_until']))
-     except:
+     except Exception as ex:
+      LOGGER.debug(ex)
       LOGGER.debug("ERROR: Could not create session_id!")
       exit(2)
 
