@@ -34,7 +34,8 @@ However, the plugin also works without encryption.
 - Download check_graylog_alerts.py to your local Graylog server
 - Put the Python script to your Pluginfolder. Usually /usr/lib/nagios/plugins/
 - Create a new command custome command:
--- object CheckCommand "check_graylog_alerts" {
+```
+object CheckCommand "check_graylog_alerts" {
     import "plugin-check-command"
     command = [ PluginDir + "/check_graylog_alerts.py" ]
     arguments += {
@@ -66,13 +67,22 @@ However, the plugin also works without encryption.
     }
 }
 
+```
+
 - Create a new Service object:
--- object Service "Service: Graylog Alerts" {
+
+```
+object Service "Service: Graylog Alerts" {
    import               "generic-service"
    host_name =          "YOUR GAYLOG HOST"
    check_command =      "check_graylog_alerts"
 }
+```
 
+
+# icinga director
+- Create a custome command with following arguments:
+![icinga director]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/check_graylog_icinga_director.png?raw=true
 
 
 # CLI Usage
@@ -82,9 +92,13 @@ However, the plugin also works without encryption.
 # Create a readonly monitoring user
 - In Graylog, open the System tab and select "Users and Teams".
 - Create a new user with assigend role: "View Manager"
-- Share your "All Events" Stream with the new user
-- Leave the rights at "Viewer".
+![icinga user]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/createIcinga2user.png
 
+- Share your "All Events" Stream with the new user
+![Share all events]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/GraylogEvents.png
+
+- Add your newly created user. Leave the rights at "Viewer".
+![Share all events]https://github.com/sowoi/graylog-alerts-to-icinga/blob/main/img/icingauserviewer.png
 
 # License
 Licensed under the terms of Apache License Version 2. See LICENSE file.
