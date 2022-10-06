@@ -88,6 +88,7 @@ object Service "Service: Graylog Alerts" {
 # CLI Usage
 - "python3 check_graylog_alerts.py -h" will show you a manual.
 
+
 ```
 Usage: check_graylog_alerts.py [options]
 
