@@ -34,6 +34,7 @@ However, the plugin also works without encryption.
 - Download check_graylog_alerts.py to your local Graylog server
 - Put the Python script to your Pluginfolder. Usually /usr/lib/nagios/plugins/
 - Create a new command custome command:
+
 ```
 object CheckCommand "check_graylog_alerts" {
     import "plugin-check-command"
@@ -90,7 +91,7 @@ object Service "Service: Graylog Alerts" {
 - "python3 check_graylog_alerts.py -h" will show you a manual.
 
 
-```
+
 Usage: check_graylog_alerts.py [options]
 
 check_graylog_alerts.py checks graylog stream for alerts. you need to setup
@@ -127,7 +128,7 @@ Options:
   Query options:
     -q QUERY, --query=QUERY
                         graylog search query (default: show all queries)
-```
+
 
 
 # Create a readonly monitoring user
