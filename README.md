@@ -71,6 +71,7 @@ object CheckCommand "check_graylog_alerts" {
 
 - Create a new Service object:
 
+
 ```
 object Service "Service: Graylog Alerts" {
    import               "generic-service"
