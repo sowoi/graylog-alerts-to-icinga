@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "graylog-alerts-to-icinga"
+version = "1.0.1"
+description = "Monitor graylog alerts with icinga2"
+authors = ["Okko <10256263+sowoi@users.noreply.github.com>"]
+license = "Apache License Version 2"
+readme = "README.md"
+packages = [{include = "graylog_alerts_to_icinga"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
