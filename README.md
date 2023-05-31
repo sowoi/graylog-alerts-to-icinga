@@ -88,16 +88,18 @@ object Service "Service: Graylog Alerts" {
 
 
 # CLI Usage
-- "python3 check_graylog_alerts.py -h" will show you a manual.
+- `python3 check_graylog_alerts.py -h` will show you a manual.
 
 
 
 Usage: check_graylog_alerts.py [options]
 
 check_graylog_alerts.py checks graylog stream for alerts. you need to setup
-alerts beforehand.   Example: check_graylog_alerts.py -H 192.168.134.11 -u
-admin -p secret -m testmachine -t 33
+alerts beforehand.  
 
+Example: `check_graylog_alerts.py -H 192.168.134.11 -u admin -p secret -m testmachine -t 33`
+
+```
 Options:
   -h, --help            show this help message and exit
 
@@ -128,7 +130,7 @@ Options:
   Query options:
     -q QUERY, --query=QUERY
                         graylog search query (default: show all queries)
-
+```
 
 
 # Create a readonly monitoring user
