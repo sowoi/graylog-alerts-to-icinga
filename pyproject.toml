@@ -9,7 +9,7 @@ packages = [{include = "graylog_alerts_to_icinga"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "^2.31.0"
+requests = "^2.32.4"
 
 
 [build-system]
