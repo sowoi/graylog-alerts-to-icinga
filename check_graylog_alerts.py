@@ -1,5 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Developer: Massoud Ahmed 
+# Additional Authors: Dominik Riva
 
 
 import sys, socket, argparse, json, requests, urllib3, ipaddress, logging
@@ -22,7 +23,7 @@ headers = {
 
 def search_graylog_for_alerts(headers, session_id, host, query, machine, timerange, crit, warn, result,proto):
 
-    base = (proto +"://" + host+ ":9000/api/events/search")
+    base = (proto +"://" + host+ ":"+port+"/api/events/search")
     LOGGER.debug("Using "+ base+ " to search ")
 
     data = '{"sort_direction": "desc", "timerange": { "type": "relative", "from" : "'+timerange+'"},  "query": "'+query+'",  "sort_by": "timestamp"}'   
@@ -67,7 +68,7 @@ def unpackGraylogKeys(*args):
 def create_session(headers, host,user,password):
     # create session id for api request
 
-    base = ("https://" + host+ ":9000/api/system/sessions")
+    base = ("https://" + host+ ":" + port + "/api/system/sessions")
     LOGGER.debug("Using "+ base+ " in order to create session id ")
     proto = "https"
     data = '{"username":"'+user+'", "password":"'+password+'", "host":""}'
@@ -80,7 +81,7 @@ def create_session(headers, host,user,password):
     except Exception as ex:
      LOGGER.debug(ex)
      try:
-      base = ("http://" + host+ ":9000/api/system/sessions")
+      base = ("http://" + host+ ":"+port+"/api/system/sessions")
       LOGGER.debug("https did not work. Using "+ base+ " instead")
       proto="http"
       data = '{"username":"'+user+'", "password":"'+password+'", "host":""}'
@@ -108,6 +109,7 @@ if __name__ == "__main__":
         parser = OptionParser(description=desc)
         gen_opts = OptionGroup(parser, "Generic options")
         host_opts = OptionGroup(parser, "Host options")
+        port_opts = OptionGroup(parser, "Port options")
         user_opts = OptionGroup(parser, "User options")
         password_opts = OptionGroup(parser, "Password options")
         machine_opts = OptionGroup(parser, "Machine options")
@@ -115,6 +117,7 @@ if __name__ == "__main__":
         query_opts = OptionGroup(parser, "Query options")
         parser.add_option_group(gen_opts)
         parser.add_option_group(host_opts)
+        parser.add_option_group(port_opts)
         parser.add_option_group(user_opts)
         parser.add_option_group(password_opts)
         parser.add_option_group(machine_opts)
@@ -128,6 +131,9 @@ if __name__ == "__main__":
         #-H / --host
         host_opts.add_option("-H", "--host", dest="host", default="", action="store", metavar="HOST", help="defines graylog  hostname or IP")
 
+	#-P / --port
+        port_opts.add_option("-P", "--port", dest="port", default="9000", action="store", metavar="PORT", help="defines graylog  port")
+
         #-u / --user
         user_opts.add_option("-u", "--user", dest="graylog_user",  default="admin", action="store",metavar="USER", help="graylog user with access to API and event stream  (default: admin)")
 
@@ -136,7 +142,6 @@ if __name__ == "__main__":
 
         #-q / --query
         query_opts.add_option("-q", "--query", dest="graylog_search_query", default=" ", action="store", metavar="QUERY", help="graylog search query (default: show all queries)")
-        
 
         #-m / --machine
         machine_opts.add_option("-m", "--machine", dest="graylog_machine", default="all", action="store", type="string", metavar="MACHINE", help="machine to check for in graylog stream  (default: all)")
@@ -147,8 +152,8 @@ if __name__ == "__main__":
         #parse arguments
         (options, args) = parser.parse_args()
 
-        
         host = options.host
+        port = options.port
         user = options.graylog_user
         password = options.graylog_password
         query = options.graylog_search_query
@@ -173,5 +178,3 @@ if __name__ == "__main__":
         else:
             print(result)
             sys.exit(0)
-
-
